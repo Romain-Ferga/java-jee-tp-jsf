@@ -1,0 +1,32 @@
+body{
+	padding: 0;
+	margin: 0;
+	background: #cccccc;
+}
+.styleForm{
+	width: 50%; 
+	margin: auto; 
+	background-color: #c1d9fc; 
+	padding-bottom: 15px;
+}
+.styleEspUtilisateur{
+	text-align: center; 
+	color: white; 
+	background-color: #6683b1;
+}
+#pLogin{
+	text-align: center;
+}
+#pPwd{
+	text-align: center;
+}
+#pSubmit{
+	text-align: center; 
+	width: 50%; 
+	margin: auto;
+}
+
+#pError{
+	text-align: center;
+	color: red; 
+}

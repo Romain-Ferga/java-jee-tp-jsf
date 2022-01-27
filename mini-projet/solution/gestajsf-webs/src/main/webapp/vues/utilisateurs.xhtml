@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Liste d'Utilisateurs </title>
+     <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min.css"/>
+     <link rel="stylesheet" href="#{request.contextPath}/css/styles.css" />
+     <script type="text/javascript" src="#{request.contextPath}/js/gesta.js"></script>
+</h:head>
+
+<h:body>
+	<h:form>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">TACHES</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+	                	<li><a href="#{request.contextPath}/">Accueil</a></li>
+	                    <li><a href="#{request.contextPath}/vues/taches.xhtml">Taches</a></li>
+	                    <li><a href="#{request.contextPath}/vues/inscription.xhtml">Inscription</a></li>
+	                    <li><h:commandLink value="Deconnexion" action="#{logoutManagedBean.logoutAction}"/></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <section class="container">
+        <div class="pages">
+            <header>
+                <h1>Bienvenue M. (Mlle) <b>${paramNom}</b></h1>
+                <br/>
+                <h1>Liste des utilisateurs <h:link outcome="create-user"><h:graphicImage width="30" value="../img/carousel_plus.png" /></h:link></h1>
+            </header>
+            <div class="taches table-responsive">
+             
+	            <h:dataTable id="userListDatatableId" value="#{listerUserManagedBean.listeUsers}" var="currentUser"
+	    			styleClass="table table-bordered"
+	    			headerClass="order-table-header"
+	    			rowClasses="order-table-odd-row,order-table-even-row">
+	    			<h:column>
+	    				<!-- column header -->
+	    				<f:facet name="header"><h:outputText value="Nom"/></f:facet>
+	    				#{currentUser.nom}
+	    			</h:column>
+	    			<h:column>
+	    				<f:facet name="header"><h:outputText value="Prenom"/></f:facet>
+	    				#{currentUser.prenom}
+	    			</h:column>
+	    			<h:column>
+	    				<f:facet name="header"><h:outputText value="Code Postal"/></f:facet>
+	    				#{currentUser.codePostal}
+	    			</h:column>
+	    			<h:column>
+	    				<f:facet name="header"><h:outputText value="Departement"/></f:facet>
+	    				#{currentUser.libDepartement}
+	    			</h:column>
+	    			<h:column>
+	    				<f:facet name="header"><h:outputText value="Email"/></f:facet>
+	    				#{currentUser.email}
+	    			</h:column>
+	    			<h:column>
+	    				<f:facet name="header"><h:outputText value="Date Inscription"/></f:facet>
+	    				 <h:outputText value="#{currentUser.dateInscription}">
+	                 	    <f:convertDateTime pattern="dd-MM-yyyy"/>
+	                	</h:outputText>
+	    			</h:column>
+	    			<h:column>
+	    				<f:facet name="header">Action U</f:facet>
+						<h:link value="Modifier" outcome="preload-user">
+							<f:param name="idUserParam" value="#{currentUser.idUtilisateur}" />
+						</h:link>
+	    			</h:column>
+	    			<h:column>
+	    			    <f:facet name="header">Action D</f:facet>
+	    				<h:commandLink  value="Supprimer" action="#{listerUserManagedBean.deleteUserById(currentUser.idUtilisateur)}" onclick="return confirm('Etes vous certain de vouloir supprimer Cette entite ?');">
+	    				  <f:ajax render="userListDatatableId"/>
+	    				</h:commandLink>
+	    			</h:column>
+	    		</h:dataTable>
+            </div>
+        </div>
+    </section>
+  </h:form>
+</h:body>
+
+</html>

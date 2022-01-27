@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>JSF 2.0 Greeting</title>
+</h:head> 
+<h:body>
+	<h3><h:outputText value="#{msg.register_form_home}"/></h3>
+		<h:form>
+        <h4>
+          <h:outputText value="#{msg.register_form_msg}" />
+        </h4>
+        <table>
+            <tr>
+              <td><h:outputText value="#{msg.register_firstname}"/>:</td>
+              <td>
+                <h:inputText value="#{userBean.prenom}" required="true"  id="prenom" requiredMessage="#{msg.register_prenom_required}"/>
+                <!--  <h:message for="prenom" style="color : red"/>-->
+              </td>
+            </tr>
+            <tr>
+              <td><h:outputText value="#{msg.register_name}"/>:</td>
+              <td>
+                <h:inputText value="#{userBean.nom}" required="true"  id="nom"/>
+                <h:message for="nom" style="color : red"/>
+              </td>
+            </tr>
+            <tr>
+              <td><h:outputText value="#{msg.register_sex}"/>:</td>
+              <td>
+                <h:selectOneRadio value="#{userBean.genre}" required="true" id="genre" >
+                  <f:selectItem itemLabel="Homme" itemValue="homme"/>
+                  <f:selectItem itemLabel="Femme" itemValue="femme"/>
+                </h:selectOneRadio>
+                <h:message for="genre"/>
+              </td>
+            </tr>
+            <tr>
+              <td><h:outputText value="#{msg.register_birthdate}"/>:</td>
+              <td>
+                <h:inputText value="#{userBean.datenaissance}" id="datenaissance" required="true" >
+                  <f:convertDateTime pattern="MM-dd-yy"/>
+                </h:inputText>
+                (mm-dd-yy)
+                <h:message for="datenaissance"/>
+              </td>
+            </tr>
+            <tr>
+              <td><h:outputText value="#{msg.register_mail}"/>:</td>
+              <td>
+                <h:inputText value="#{userBean.email}" required="true"
+                             validator="#{userBean.validateEmail}" id="email"/>
+                <h:message for="email"/>
+              </td>
+            </tr>
+            <tr>
+              <td><h:outputText value="#{msg.register_service_level}"/>:</td>
+              <td>
+                <h:selectOneMenu value="#{userBean.niveauService}">
+                 <!--<f:selectItems value="#{userBean.listNiveauService}" />-->
+                  <f:selectItem itemLabel="Basic" itemValue="basic"/>
+                  <f:selectItem itemLabel="Medium" itemValue="medium"/>
+                  <f:selectItem itemLabel="Premium" itemValue="premium"/>
+                </h:selectOneMenu>
+              </td>
+            </tr>
+        </table>
+        <p><h:commandButton value="#{msg.register_submit_button}" action="register" /></p>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <h:head>
+     <title>JSF 2.0 Hello World</title>
+    </h:head>
+    <h:body bgcolor="white">
+     <h:form>
+        <h2>
+         Inscription Au site de l'ESIC
+        </h2>
+        <h4>
+          Inscription confirmée, nouvel utilisateur ajouté!
+        </h4>
+       <table>
+            <tr>
+              <td>Prénom:</td>
+              <td>
+                <h:outputText value="#{userBean.prenom}" />
+              </td>
+            </tr>
+            <tr>
+              <td>Nom:</td>
+              <td>
+                <h:outputText value="#{userBean.nom}" />
+              </td>
+            </tr>
+            <tr>
+              <td>Sexe:</td>
+              <td>
+                <h:outputText value="#{userBean.genre}" />                
+              </td>
+            </tr>
+            <tr>
+              <td>Date de Naissance:</td>
+              <td>              
+                <h:outputText value="#{userBean.datenaissance}" >
+                     <f:convertDateTime pattern="MM-dd-yy"/>
+                </h:outputText>
+              </td>
+            </tr>
+            <tr>
+              <td>Email :</td>
+              <td>
+                <h:outputText value="#{userBean.email}" />
+              </td>
+            </tr>
+            <tr>
+              <td>Niveau de service:</td>
+              <td>
+                <h:outputText value="#{userBean.niveauService}" />
+              </td>
+            </tr>
+        </table>
+      </h:form>
+    </h:body>
+</html>

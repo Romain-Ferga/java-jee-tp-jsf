@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Inscription </title>
+     <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min.css"/>
+     <link rel="stylesheet" href="#{request.contextPath}/css/styles.css" />
+     <script type="text/javascript" src="#{request.contextPath}/js/main.js"></script>
+</h:head>
+
+<h:body>
+  <h:form  onsubmit="return verifFormGlobal()">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">TACHES</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#{request.contextPath}/">Accueil</a></li>
+                    <li><a href="#{request.contextPath}/vues/taches.xhtml">Taches</a></li>
+                    <li><a href="#{request.contextPath}/vues/utilisateurs.xhtml">Utilisateurs</a></li>
+                    <li><h:commandLink value="Deconnexion" action="#{logoutManagedBean.logoutAction}"/></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <section class="container">
+        <div class="pages">
+            <header>
+                <h1>Inscription</h1>
+            </header>
+            <div class="connexion">
+                    <div class="form-group form-group-lg">
+                     	<h:selectOneRadio value="#{gestionUserManagedBean.userCourant.sexe}" required="true" id="genre" >
+		                  <f:selectItem itemLabel="Homme" itemValue="1"/>
+		                  <f:selectItem itemLabel="Femme" itemValue="2"/>
+		                </h:selectOneRadio>
+               			 <h:message for="genre"/>
+                    </div>
+                    <div class="form-group form-group-lg">
+                        <h:inputText class="form-control no-border" id="prenom" p:placeholder="FirstName" value="#{gestionUserManagedBean.userCourant.prenom}"/>
+                        <h:message for="prenom"/>
+                    </div>
+                    <div class="form-group form-group-lg">
+                         <h:inputText class="form-control no-border" id="nom" p:placeholder="Name" value="#{gestionUserManagedBean.userCourant.nom}"/>
+                         <h:message for="nom"/>
+                    </div>
+                    <div class="form-group form-group-lg">
+                         <h:inputText class="form-control no-border" id="email" p:placeholder="Email"  value="#{gestionUserManagedBean.userCourant.email}"/>
+                         <h:message for="email"/>
+                    </div>
+                    <div class="form-group form-group-lg">
+                         <h:inputSecret class="form-control no-border" id="password" p:placeholder="Password" value="#{gestionUserManagedBean.userCourant.password}"/>
+                         <h:message for="password"/>
+                    </div>
+                    <div class="form-group form-group-lg">
+                         <h:inputText class="form-control no-border" id="codePostal" p:placeholder="Code Postal" value="#{gestionUserManagedBean.userCourant.codePostal}"/>
+                         <h:message for="codePostal"/>
+                    </div>
+                    <div class="form-group form-group-lg">
+                       <h:selectOneMenu value="#{gestionUserManagedBean.userCourant.codeDepartement}" >
+						    <f:selectItems value="#{gestionUserManagedBean.departements}" var="depCourant" itemValue="#{depCourant.codeDepartement}" itemLabel="#{depCourant.libDepartement}" />
+					   </h:selectOneMenu>
+                    </div>
+                     <br/>	
+					 <h:inputHidden  value="${gestionUserManagedBean.userCourant.idUtilisateur}"/>
+                    <h:commandButton styleClass="btn btn-success no-border btn-lg btn-block" value="Valider" action="#{gestionUserManagedBean.addUserAction}" />
+                    <h:messages style="color:red;margin:8px;"  globalOnly="true" />
+            </div>
+        </div>
+    </section>
+   </h:form>
+</h:body>
+
+</html>
